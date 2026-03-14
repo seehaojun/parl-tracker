@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 // ─── TASK TEMPLATE ───────────────────────────────────────────
 const TASK_TEMPLATES = [
@@ -136,12 +136,10 @@ async function loadData(key, fallback) {
   }
 }
 
+// Returns "ok" | "no-token" | "error"
 async function saveData(key, value) {
   const token = localStorage.getItem("gh-pat");
-  if (!token) {
-    console.warn("No GitHub token set — open Team tab to configure.");
-    return;
-  }
+  if (!token) return "no-token";
   try {
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -157,7 +155,7 @@ async function saveData(key, value) {
     }
     const newData = { ...currentData, [key]: value };
     const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(newData, null, 2))));
-    await fetch(GH_API, {
+    const putRes = await fetch(GH_API, {
       method: "PUT",
       headers,
       body: JSON.stringify({
@@ -166,8 +164,10 @@ async function saveData(key, value) {
         ...(sha ? { sha } : {}),
       }),
     });
+    return putRes.ok ? "ok" : "error";
   } catch (e) {
     console.error("GitHub save failed:", e);
+    return "error";
   }
 }
 
@@ -181,6 +181,8 @@ export default function App() {
   const [team, setTeam] = useState([]);
   const [selectedCycleId, setSelectedCycleId] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [saveStatus, setSaveStatus] = useState(null); // null | "saving" | "ok" | "no-token" | "error"
+  const saveStatusTimer = React.useRef(null);
 
   function handlePasscodeSubmit() {
     if (passcode === "8888") {
@@ -203,21 +205,24 @@ export default function App() {
   }, []);
 
   // Save whenever data changes
-  const saveCycles = useCallback(
-    (newCycles) => {
-      setCycles(newCycles);
-      saveData("parl-cycles", newCycles);
-    },
-    []
-  );
+  function triggerSave(key, value) {
+    setSaveStatus("saving");
+    clearTimeout(saveStatusTimer.current);
+    saveData(key, value).then((result) => {
+      setSaveStatus(result);
+      saveStatusTimer.current = setTimeout(() => setSaveStatus(null), 3000);
+    });
+  }
 
-  const saveTeam = useCallback(
-    (newTeam) => {
-      setTeam(newTeam);
-      saveData("parl-team", newTeam);
-    },
-    []
-  );
+  const saveCycles = useCallback((newCycles) => {
+    setCycles(newCycles);
+    triggerSave("parl-cycles", newCycles);
+  }, []);
+
+  const saveTeam = useCallback((newTeam) => {
+    setTeam(newTeam);
+    triggerSave("parl-team", newTeam);
+  }, []);
 
   // ─── ADD SITTING DATE ──────────────────────────────────────
   function addSittingDate(dateStr, notes) {
@@ -365,7 +370,18 @@ export default function App() {
               <p style={styles.headerSub}>Parliamentary Affairs Cycle Manager</p>
             </div>
           </div>
-          <nav style={styles.nav}>
+          <nav style={{ ...styles.nav, alignItems: "center" }}>
+            {saveStatus === "saving" && (
+              <span style={styles.saveIndicator}>Saving...</span>
+            )}
+            {saveStatus === "ok" && (
+              <span style={{ ...styles.saveIndicator, color: "#16a34a" }}>Saved</span>
+            )}
+            {(saveStatus === "error" || saveStatus === "no-token") && (
+              <span style={{ ...styles.saveIndicator, color: "#dc2626" }}>
+                {saveStatus === "no-token" ? "Not saved — set token in Team tab" : "Save failed"}
+              </span>
+            )}
             {[
               ["dashboard", "Dashboard"],
               ["add", "+ Sitting Date"],
@@ -1134,6 +1150,13 @@ const styles = {
     background: "rgba(255,255,255,0.15)",
     color: "white",
     borderColor: "rgba(255,255,255,0.4)",
+  },
+  saveIndicator: {
+    fontSize: 12,
+    fontFamily: "system-ui, sans-serif",
+    color: "rgba(255,255,255,0.7)",
+    marginRight: 8,
+    whiteSpace: "nowrap",
   },
   main: { maxWidth: 900, margin: "0 auto", padding: "24px 16px" },
 
