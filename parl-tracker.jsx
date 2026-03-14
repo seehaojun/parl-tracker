@@ -119,11 +119,8 @@ function generateId() {
 }
 
 // ─── STORAGE HELPERS ─────────────────────────────────────────
-const GH_OWNER = "seehaojun";
-const GH_REPO = "parl-tracker";
-const GH_DATA_FILE = "data.json";
-const GH_API = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_DATA_FILE}`;
-const GH_RAW = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/main/${GH_DATA_FILE}`;
+const GH_RAW = `https://raw.githubusercontent.com/seehaojun/parl-tracker/main/data.json`;
+const SAVE_API = `https://parl-tracker.vercel.app/api/save`;
 
 async function loadData(key, fallback) {
   try {
@@ -136,37 +133,17 @@ async function loadData(key, fallback) {
   }
 }
 
-// Returns "ok" | "no-token" | "error"
+// Returns "ok" | "error"
 async function saveData(key, value) {
-  const token = localStorage.getItem("gh-pat");
-  if (!token) return "no-token";
   try {
-    const headers = {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/vnd.github+json",
-      "Content-Type": "application/json",
-    };
-    const metaRes = await fetch(GH_API, { headers });
-    let sha, currentData = {};
-    if (metaRes.ok) {
-      const meta = await metaRes.json();
-      sha = meta.sha;
-      currentData = JSON.parse(atob(meta.content.replace(/\n/g, "")));
-    }
-    const newData = { ...currentData, [key]: value };
-    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(newData, null, 2))));
-    const putRes = await fetch(GH_API, {
-      method: "PUT",
-      headers,
-      body: JSON.stringify({
-        message: `data: update ${key}`,
-        content: encoded,
-        ...(sha ? { sha } : {}),
-      }),
+    const res = await fetch(SAVE_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ key, value }),
     });
-    return putRes.ok ? "ok" : "error";
+    return res.ok ? "ok" : "error";
   } catch (e) {
-    console.error("GitHub save failed:", e);
+    console.error("Save failed:", e);
     return "error";
   }
 }
@@ -377,10 +354,8 @@ export default function App() {
             {saveStatus === "ok" && (
               <span style={{ ...styles.saveIndicator, color: "#16a34a" }}>Saved</span>
             )}
-            {(saveStatus === "error" || saveStatus === "no-token") && (
-              <span style={{ ...styles.saveIndicator, color: "#dc2626" }}>
-                {saveStatus === "no-token" ? "Not saved — set token in Team tab" : "Save failed"}
-              </span>
+            {saveStatus === "error" && (
+              <span style={{ ...styles.saveIndicator, color: "#dc2626" }}>Save failed</span>
             )}
             {[
               ["dashboard", "Dashboard"],
@@ -961,18 +936,6 @@ function MyTasksView({ cycles, team, onGoToCycle }) {
 function TeamView({ team, onSave }) {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
-  const [pat, setPat] = useState(localStorage.getItem("gh-pat") || "");
-  const [patSaved, setPatSaved] = useState(!!localStorage.getItem("gh-pat"));
-
-  function savePat() {
-    const trimmed = pat.trim();
-    if (trimmed) {
-      localStorage.setItem("gh-pat", trimmed);
-    } else {
-      localStorage.removeItem("gh-pat");
-    }
-    setPatSaved(!!trimmed);
-  }
 
   function addMember() {
     if (!name.trim()) return;
@@ -991,48 +954,6 @@ function TeamView({ team, onSave }) {
       <p style={styles.formHint}>
         Add team members here. You can then assign them to tasks in each cycle.
       </p>
-
-      {/* ─── GITHUB SYNC ─────────────────────────────────── */}
-      <div style={{
-        background: "white",
-        border: "1px solid #e2e0db",
-        borderRadius: 10,
-        padding: "16px 20px",
-        marginBottom: 28,
-      }}>
-        <div style={{ fontSize: 14, fontWeight: 700, color: "#1e3a5f", marginBottom: 4 }}>
-          GitHub Sync
-        </div>
-        <p style={{ ...styles.formHint, marginBottom: 12 }}>
-          Enter a GitHub fine-grained personal access token with <strong>Contents: Read and write</strong> access to this repo.
-          Your token is stored only in this browser.{" "}
-          <a
-            href="https://github.com/settings/personal-access-tokens/new"
-            target="_blank"
-            rel="noreferrer"
-            style={{ color: "#1e3a5f" }}
-          >
-            Create token
-          </a>
-        </p>
-        <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-          <input
-            type="password"
-            value={pat}
-            onChange={(e) => { setPat(e.target.value); setPatSaved(false); }}
-            placeholder="github_pat_..."
-            style={{ ...styles.input, flex: 1, fontFamily: "monospace", fontSize: 13 }}
-          />
-          <button onClick={savePat} style={styles.btnPrimary}>
-            {patSaved ? "Saved" : "Save"}
-          </button>
-        </div>
-        {patSaved && (
-          <p style={{ fontSize: 12, color: "#16a34a", marginTop: 6, fontFamily: "system-ui, sans-serif" }}>
-            Token saved. Data will sync to GitHub on every change.
-          </p>
-        )}
-      </div>
 
       <div style={styles.teamAddRow}>
         <input
