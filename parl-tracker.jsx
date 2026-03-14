@@ -119,12 +119,12 @@ function generateId() {
 }
 
 // ─── STORAGE HELPERS ─────────────────────────────────────────
-const GH_RAW = `https://raw.githubusercontent.com/seehaojun/parl-tracker/main/data.json`;
+const LOAD_API = `https://parl-tracker.vercel.app/api/load`;
 const SAVE_API = `https://parl-tracker.vercel.app/api/save`;
 
 async function loadData(key, fallback) {
   try {
-    const res = await fetch(`${GH_RAW}?t=${Date.now()}`);
+    const res = await fetch(LOAD_API);
     if (!res.ok) return fallback;
     const all = await res.json();
     return all[key] ?? fallback;
