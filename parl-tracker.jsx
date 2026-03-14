@@ -121,8 +121,8 @@ function generateId() {
 // ─── STORAGE HELPERS ─────────────────────────────────────────
 async function loadData(key, fallback) {
   try {
-    const result = await window.storage.get(key);
-    return result ? JSON.parse(result.value) : fallback;
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
   } catch {
     return fallback;
   }
@@ -130,7 +130,7 @@ async function loadData(key, fallback) {
 
 async function saveData(key, data) {
   try {
-    await window.storage.set(key, JSON.stringify(data));
+    localStorage.setItem(key, JSON.stringify(data));
   } catch (e) {
     console.error("Save failed:", e);
   }
@@ -141,7 +141,7 @@ export default function App() {
   const [unlocked, setUnlocked] = useState(false);
   const [passcode, setPasscode] = useState("");
   const [passcodeError, setPasscodeError] = useState(false);
-  const [view, setView] = useState("add");
+  const [view, setView] = useState("dashboard");
   const [cycles, setCycles] = useState([]);
   const [team, setTeam] = useState([]);
   const [selectedCycleId, setSelectedCycleId] = useState(null);
