@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elysa Chen — Policy Inventory</title>
+<style>
+  :root {
+    --navy: #1F3864;
+    --blue: #2E75B6;
+    --accent: #C9A227;
+    --light: #F0F5FB;
+    --text: #1a1a1a;
+    --muted: #666;
+    --border: #D8E4F0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: var(--text); background: #F7F9FC; line-height: 1.6; }
+  header { background: var(--navy); color: white; padding: 28px 40px; }
+  header h1 { font-size: 22px; font-weight: 700; letter-spacing: 0.04em; }
+  header p { font-size: 13px; color: #A8C4E0; margin-top: 4px; }
+  .meta { display: flex; gap: 24px; margin-top: 10px; }
+  .meta span { font-size: 12px; color: #7BAFD4; }
+  .meta strong { color: #C9A227; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 60px; }
+  .toc { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 20px 28px; margin-bottom: 32px; }
+  .toc h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 12px; }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 6px 20px; }
+  .toc a { color: var(--blue); text-decoration: none; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+  .toc a:hover { text-decoration: underline; }
+  .toc a .badge { background: var(--navy); color: white; font-size: 10px; border-radius: 3px; padding: 1px 5px; font-weight: 600; }
+  .section { margin-bottom: 36px; }
+  .section-header { display: flex; align-items: center; gap: 12px; background: var(--navy); color: white; padding: 12px 20px; border-radius: 6px 6px 0 0; }
+  .section-header h2 { font-size: 15px; font-weight: 700; }
+  .section-header .count { background: var(--accent); color: white; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 12px; margin-left: auto; }
+  table { width: 100%; border-collapse: collapse; background: white; border: 1px solid var(--border); border-top: none; border-radius: 0 0 6px 6px; overflow: hidden; }
+  th { background: var(--light); text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--navy); padding: 10px 14px; border-bottom: 2px solid var(--border); font-weight: 700; }
+  td { padding: 10px 14px; border-bottom: 1px solid #EDF2F8; vertical-align: top; font-size: 13px; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #F8FAFD; }
+  .no { color: var(--muted); font-size: 12px; font-weight: 600; width: 36px; }
+  .ministry-tag { display: inline-block; background: var(--light); color: var(--navy); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border); white-space: nowrap; }
+  .proposal-text { color: var(--text); }
+  .source-link { color: var(--blue); text-decoration: none; font-size: 12px; display: inline-flex; align-items: center; gap: 4px; }
+  .source-link:hover { text-decoration: underline; }
+  .source-link::after { content: "↗"; font-size: 10px; }
+  .folder-link { color: #888; }
+  .date-tag { color: var(--muted); font-size: 11px; display: block; margin-top: 2px; }
+  footer { text-align: center; font-size: 12px; color: var(--muted); padding: 20px; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Elysa Chen — Policy Inventory</h1>
+  <p>Proposals, recommendations, and policy ideas raised across parliamentary work</p>
+  <div class="meta">
+    <span><strong>65</strong> policy items</span>
+    <span><strong>9</strong> policy areas</span>
+    <span><strong>Last updated:</strong> March 2026</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <h2>Jump to Section</h2>
+    <div class="toc-grid">
+      <a href="#edu"><span class="badge">A</span> Education (MOE) — 13 items</a>
+      <a href="#work"><span class="badge">B</span> Workforce &amp; Employment (MOM) — 13 items</a>
+      <a href="#health"><span class="badge">C</span> Health &amp; Caregiving (MOH/MSF) — 8 items</a>
+      <a href="#arts"><span class="badge">D</span> Community, Arts &amp; Wellbeing (MCCY) — 10 items</a>
+      <a href="#social"><span class="badge">E</span> Social Services &amp; Child Protection (MSF) — 7 items</a>
+      <a href="#housing"><span class="badge">F</span> Housing &amp; Urban Planning (MND) — 4 items</a>
+      <a href="#transport"><span class="badge">G</span> Transport (MOT/LTA) — 6 items</a>
+      <a href="#econ"><span class="badge">H</span> Economy &amp; Finance (MOF/MTI) — 3 items</a>
+      <a href="#other"><span class="badge">I</span> Elderly, Disability &amp; Sports — 6 items</a>
+    </div>
+  </div>
+
+  <!-- A: EDUCATION -->
+  <div class="section" id="edu">
+    <div class="section-header">
+      <h2>A — Education (MOE)</h2>
+      <span class="count">13 items</span>
+    </div>
+    <table>
+      <tr><th>#</th><th style="width:200px">Ministry/Tag</th><th>Policy Proposal</th><th style="width:200px">Source</th></tr>
+      <tr>
+        <td class="no">A1</td>
+        <td><span class="ministry-tag">MOE</span></td>
+        <td class="proposal-text">Reduce class sizes; targeted reductions for humanities/languages and classes with higher concentrations of SEN students</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1eztT8aMnJXby2V_y6pXQDrugYpgZibWYbRJKuCE7Gf0/edit" target="_blank">SQ Table Feb 2026</a><span class="date-tag">Feb 2026 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">A2</td>
+        <td><span class="ministry-tag">MOE</span></td>
+        <td class="proposal-text">Emphasise soft skills and emotional-psychological development in schools — recognising these cannot be replaced by AI-led learning</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1eztT8aMnJXby2V_y6pXQDrugYpgZibWYbRJKuCE7Gf0/edit" target="_blank">SQ Table Feb 2026</a><span class="date-tag">Feb 2026 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">A3</td>
+        <td><span class="ministry-tag">MOE</span></td>
+        <td class="proposal-text">Audit food handling, cross-contamination protocols and supplier oversight in the Central Kitchen Meal Model; consider a single-cafeteria model per school</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/174Q7kbYLr2_9ibvYSBRu_66f4NShmZmt0XEMecw_7to/edit" target="_blank">Feb 2026 PQ Submission</a><span class="date-tag">Feb 2026 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">A4</td>
+        <td><span class="ministry-tag">MOE</span></td>
+        <td class="proposal-text">Conduct independent validation of teacher workload hours, especially for non-teaching duties</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/122lXjb3Aqe22aksotFyrgwpvpnPrHFQAY_jdfKRWUXU/edit" target="_blank">PQ Submission Oct 2025</a><span class="date-tag">Oct 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">A5</td>
+        <td><span class="ministry-tag">MOE</span></td>
+        <td class="proposal-text">Expand non-teaching staff complement or outsource administrative/event-planning duties to reduce teacher workload</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1_bIeXZSFoGb691AJyDvDKAZRe_ckmxB-RXei5UWmxfY/edit" target="_blank">PQ Submission Nov 2025</a><span class="date-tag">Nov 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">A6</td>
+        <td><span class="ministry-tag">MOE</span></td>
+        <td class="proposal-text">Clarify that Teaching Track promotion to GEO5A is achievable based solely on classroom excellence, without requiring administrative portfolios</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1cgY00ZM3I9Luz65h20qcibP-S-gwrJesDl8-BnlsBks/edit" target="_blank">SQs for Nov Parl</a><span class="date-tag">Nov 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">A7</td>
+        <td><span class="ministry-tag">MOE</span></td>
+        <td class="proposal-text">Implement rapid investigation and action protocols for school bullying; recognize link between childhood maltreatment and bullying involvement</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/14UlyVxNJhf0HH2Bvl4-QVHGEpTAi-2T_WtXysktYcVo/edit" target="_blank">PQ Submission Sep 2025</a><span class="date-tag">Sep 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">A8</td>
+        <td><span class="ministry-tag">MOE</span></td>
+        <td class="proposal-text">Consistent smartphone and smartwatch restrictions across all school hours with clear enforcement mechanisms</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/18lveKnj5scBzo602oda11k6gUT5FgJweFgo_Zyk7y3s/edit" target="_blank">Jan 2026 PQ Submission</a><span class="date-tag">Jan 2026 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">A9</td>
+        <td><span class="ministry-tag">MOE / NAC</span></td>
+        <td class="proposal-text">Arts-based pedagogy in CCE and non-arts subjects; dedicated arts coordinators in schools; curated repository of arts events categorised by student wellbeing topic</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1ngIIiNm_l82dhnYytYgjkvnHswLAeKGWAgfszArj1Yk/edit" target="_blank">Adjournment Motion — Arts (MCCY)</a><span class="date-tag">Feb 2026</span></td>
+      </tr>
+      <tr>
+        <td class="no">A10</td>
+        <td><span class="ministry-tag">MOE / NAC</span></td>
+        <td class="proposal-text">Expand NAC Arts Education Programme criteria to include social-emotional, relational and communication skill outcomes</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1ngIIiNm_l82dhnYytYgjkvnHswLAeKGWAgfszArj1Yk/edit" target="_blank">Adjournment Motion — Arts (MCCY)</a><span class="date-tag">Feb 2026</span></td>
+      </tr>
+      <tr>
+        <td class="no">A11</td>
+        <td><span class="ministry-tag">MOE</span></td>
+        <td class="proposal-text">Reform or abolish PSLE to broaden definition of success; computerised adaptive testing; alternative pathways for non-academic late bloomers</td>
+        <td><a class="source-link" href="https://drive.google.com/drive/folders/1Glwo8a7DWA4uPEkSfj0lPC9s6si45fen" target="_blank">ECSG Engagement Notes</a><span class="date-tag">CSO Consultation</span></td>
+      </tr>
+      <tr>
+        <td class="no">A12</td>
+        <td><span class="ministry-tag">MOE</span></td>
+        <td class="proposal-text">Reform DSA to reduce SES-based inequality; make arts, sports and enrichment accessible to all students from age 3–4</td>
+        <td><a class="source-link" href="https://drive.google.com/drive/folders/1Glwo8a7DWA4uPEkSfj0lPC9s6si45fen" target="_blank">ECSG Engagement Notes</a><span class="date-tag">CSO Consultation</span></td>
+      </tr>
+      <tr>
+        <td class="no">A13</td>
+        <td><span class="ministry-tag">MOE</span></td>
+        <td class="proposal-text">Broaden access to talent development as MOE transitions GEP to school-based approaches; resource teachers across more schools with professional development for differentiated instruction</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1-PT3JXvRd05ZReHtOVOrrE7tQFGn0HdntiMWNLz6s7g/edit" target="_blank">Budget Speech 2026 (MOE Cut)</a><span class="date-tag">Mar 2026 Budget Debate</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- B: WORKFORCE & EMPLOYMENT -->
+  <div class="section" id="work">
+    <div class="section-header">
+      <h2>B — Workforce &amp; Employment (MOM)</h2>
+      <span class="count">13 items</span>
+    </div>
+    <table>
+      <tr><th>#</th><th style="width:200px">Ministry/Tag</th><th>Policy Proposal</th><th style="width:200px">Source</th></tr>
+      <tr>
+        <td class="no">B1</td>
+        <td><span class="ministry-tag">MOM</span></td>
+        <td class="proposal-text">Review employer practices on accepting mental health-related MCs; establish enforcement mechanisms under Workplace Fairness Act</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1_bIeXZSFoGb691AJyDvDKAZRe_ckmxB-RXei5UWmxfY/edit" target="_blank">PQ Submission Nov 2025</a><span class="date-tag">Nov 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">B2</td>
+        <td><span class="ministry-tag">MOM</span></td>
+        <td class="proposal-text">Targeted GRIT Programme support for SMEs; formally accredit/integrate GRIT learning outcomes with IHL programmes</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1_bIeXZSFoGb691AJyDvDKAZRe_ckmxB-RXei5UWmxfY/edit" target="_blank">PQ Submission Nov 2025</a><span class="date-tag">Nov 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">B3</td>
+        <td><span class="ministry-tag">MOM</span></td>
+        <td class="proposal-text">Track three-year retention rates for entry-level care workers; publish indicators on whether care roles are becoming more stable and attractive</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/18lveKnj5scBzo602oda11k6gUT5FgJweFgo_Zyk7y3s/edit" target="_blank">Jan 2026 PQ Submission</a><span class="date-tag">Jan 2026 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">B4</td>
+        <td><span class="ministry-tag">MOM</span></td>
+        <td class="proposal-text">Dedicated career transition and conversion programmes for mothers returning after caregiving breaks</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/18lveKnj5scBzo602oda11k6gUT5FgJweFgo_Zyk7y3s/edit" target="_blank">Jan 2026 PQ Submission</a><span class="date-tag">Jan 2026 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">B5</td>
+        <td><span class="ministry-tag">PMO / MOF</span></td>
+        <td class="proposal-text">Career Comeback Tax Credit: tax relief for employers who intentionally hire returning stay-home parents and caregivers</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1-PT3JXvRd05ZReHtOVOrrE7tQFGn0HdntiMWNLz6s7g/edit" target="_blank">Budget Speech 2026 (PMO Cut)</a><span class="date-tag">Mar 2026 Budget Debate</span></td>
+      </tr>
+      <tr>
+        <td class="no">B6</td>
+        <td><span class="ministry-tag">MOM</span></td>
+        <td class="proposal-text">Legislate mandatory paid lactation breaks; require lockable, private lactation facilities in all workplaces with 25+ employees</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1RAoSXJC3MZ-eVvQq2fg5IZHobAyYjvjyYeYeNxWBdoc/edit" target="_blank">PQ Sep 2025</a> / <a class="source-link folder-link" href="https://drive.google.com/drive/folders/1ATOSGKfBkhPCZ7gvy-CqKIhUphjjQQ69" target="_blank">BMSG Engagement</a><span class="date-tag">Sep 2025 + CSO</span></td>
+      </tr>
+      <tr>
+        <td class="no">B7</td>
+        <td><span class="ministry-tag">MOM</span></td>
+        <td class="proposal-text">Enforce protections for mothers returning from maternity leave against re-contracting, demotion, and role restructuring</td>
+        <td><a class="source-link folder-link" href="https://drive.google.com/drive/folders/1ATOSGKfBkhPCZ7gvy-CqKIhUphjjQQ69" target="_blank">BMSG Engagement Notes</a><span class="date-tag">CSO Consultation</span></td>
+      </tr>
+      <tr>
+        <td class="no">B8</td>
+        <td><span class="ministry-tag">MOM / PMO</span></td>
+        <td class="proposal-text">Convert shared parental leave to fully paid, non-transferable paternity leave to normalise father participation and reduce asymmetric career cost on mothers</td>
+        <td><a class="source-link folder-link" href="https://drive.google.com/drive/folders/1ATOSGKfBkhPCZ7gvy-CqKIhUphjjQQ69" target="_blank">BMSG Engagement Notes</a><span class="date-tag">CSO Consultation</span></td>
+      </tr>
+      <tr>
+        <td class="no">B9</td>
+        <td><span class="ministry-tag">MOM / MOF</span></td>
+        <td class="proposal-text">Address CPF contribution gaps and retirement adequacy impact for caregivers who reduce paid work</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/174Q7kbYLr2_9ibvYSBRu_66f4NShmZmt0XEMecw_7to/edit" target="_blank">Feb 2026 PQ Submission</a><span class="date-tag">Feb 2026 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">B10</td>
+        <td><span class="ministry-tag">MOM</span></td>
+        <td class="proposal-text">Investigate foreigners working without valid passes; TEP scheme abuse prosecutions data (2023–2024)</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1RAoSXJC3MZ-eVvQq2fg5IZHobAyYjvjyYeYeNxWBdoc/edit" target="_blank">PQ Submission Sep 2025</a><span class="date-tag">Sep 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">B11</td>
+        <td><span class="ministry-tag">MOM</span></td>
+        <td class="proposal-text">Review e2i/WSG effectiveness using disaggregated metrics: placement rates, time-to-placement, and wage outcomes for retrenched workers</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/14UlyVxNJhf0HH2Bvl4-QVHGEpTAi-2T_WtXysktYcVo/edit" target="_blank">PQ Submission Sep 2025</a><span class="date-tag">Sep 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">B12</td>
+        <td><span class="ministry-tag">MOM</span></td>
+        <td class="proposal-text">SkillsFuture Jobseeker Support Scheme: track and publish uptake data vs 60,000/year projection</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/14UlyVxNJhf0HH2Bvl4-QVHGEpTAi-2T_WtXysktYcVo/edit" target="_blank">PQ Submission Sep 2025</a><span class="date-tag">Sep 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">B13</td>
+        <td><span class="ministry-tag">ICA / MHA</span></td>
+        <td class="proposal-text">Long-Term Visit Pass pathway for foreign spouses of Singapore citizens — clear assessment criteria and recourse mechanisms</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/18lveKnj5scBzo602oda11k6gUT5FgJweFgo_Zyk7y3s/edit" target="_blank">Jan 2026 PQ Submission</a><span class="date-tag">Jan 2026 Parliament</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- C: HEALTH & CAREGIVING -->
+  <div class="section" id="health">
+    <div class="section-header">
+      <h2>C — Health &amp; Caregiving (MOH/MSF)</h2>
+      <span class="count">8 items</span>
+    </div>
+    <table>
+      <tr><th>#</th><th style="width:200px">Ministry/Tag</th><th>Policy Proposal</th><th style="width:200px">Source</th></tr>
+      <tr>
+        <td class="no">C1</td>
+        <td><span class="ministry-tag">PMO / MOH</span></td>
+        <td class="proposal-text">Government-funded structured postpartum home visits by trained maternity nurses: newborn care, postnatal depression screening, family vulnerability detection — modelled on the Netherlands' kraamzorg and Taiwan's 2025 postpartum visit programme</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1-PT3JXvRd05ZReHtOVOrrE7tQFGn0HdntiMWNLz6s7g/edit" target="_blank">Budget Speech 2026 (PMO Cut)</a><span class="date-tag">Mar 2026 Budget Debate</span></td>
+      </tr>
+      <tr>
+        <td class="no">C2</td>
+        <td><span class="ministry-tag">MOH</span></td>
+        <td class="proposal-text">Mandate Baby-Friendly Hospital Initiative status across all public hospitals with rooming-in protocols and breastfeeding support</td>
+        <td><a class="source-link folder-link" href="https://drive.google.com/drive/folders/1ATOSGKfBkhPCZ7gvy-CqKIhUphjjQQ69" target="_blank">BMSG Engagement Notes</a><span class="date-tag">CSO Consultation</span></td>
+      </tr>
+      <tr>
+        <td class="no">C3</td>
+        <td><span class="ministry-tag">MSF / MOH</span></td>
+        <td class="proposal-text">Establish community-based childminding services for children aged 0–18 months, filling the gap between formal infant care (from 2 months) and informal family caregiving</td>
+        <td><a class="source-link folder-link" href="https://drive.google.com/drive/folders/1ATOSGKfBkhPCZ7gvy-CqKIhUphjjQQ69" target="_blank">BMSG Engagement Notes</a><span class="date-tag">CSO Consultation</span></td>
+      </tr>
+      <tr>
+        <td class="no">C4</td>
+        <td><span class="ministry-tag">MOH</span></td>
+        <td class="proposal-text">Review CHAS subsidy cliff effects for households marginally above thresholds; introduce graduated subsidy tiers for B20–B40 households</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1_bIeXZSFoGb691AJyDvDKAZRe_ckmxB-RXei5UWmxfY/edit" target="_blank">PQ Submission Nov 2025</a><span class="date-tag">Nov 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">C5</td>
+        <td><span class="ministry-tag">MOH</span></td>
+        <td class="proposal-text">Address mental health gap: individuals who cannot maintain community living but do not meet IMH admission criteria — develop intermediate care options</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/174Q7kbYLr2_9ibvYSBRu_66f4NShmZmt0XEMecw_7to/edit" target="_blank">Feb 2026 PQ Submission</a><span class="date-tag">Feb 2026 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">C6</td>
+        <td><span class="ministry-tag">MOH</span></td>
+        <td class="proposal-text">Review and publish criteria for MediSave withdrawal limit appeals; ensure transparent case-by-case assessment process for urgent medical needs</td>
+        <td><span style="color:var(--muted); font-size:12px">PQ CSV Database</span><span class="date-tag">Sep 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">C7</td>
+        <td><span class="ministry-tag">MSF / MOH</span></td>
+        <td class="proposal-text">Close gaps in long-term financial security and employment re-entry pathways for individuals who exit the workforce for unpaid caregiving</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/174Q7kbYLr2_9ibvYSBRu_66f4NShmZmt0XEMecw_7to/edit" target="_blank">Feb 2026 PQ Submission</a><span class="date-tag">Feb 2026 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">C8</td>
+        <td><span class="ministry-tag">MOH</span></td>
+        <td class="proposal-text">Develop infrastructure and policy measures to address heat stress and heat-related illness among vulnerable groups (elderly, children, PWDs, low-income families)</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/18lveKnj5scBzo602oda11k6gUT5FgJweFgo_Zyk7y3s/edit" target="_blank">Jan 2026 PQ Submission</a><span class="date-tag">Jan 2026 Parliament</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- D: COMMUNITY, ARTS & WELLBEING -->
+  <div class="section" id="arts">
+    <div class="section-header">
+      <h2>D — Community, Arts &amp; Wellbeing (MCCY/NAC)</h2>
+      <span class="count">10 items</span>
+    </div>
+    <table>
+      <tr><th>#</th><th style="width:200px">Ministry/Tag</th><th>Policy Proposal</th><th style="width:200px">Source</th></tr>
+      <tr>
+        <td class="no">D1</td>
+        <td><span class="ministry-tag">MCCY</span></td>
+        <td class="proposal-text">Third-space heartland hubs co-located with libraries/CCs: free, unstructured spaces for families and youth; repurpose void decks for community connection</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1-PT3JXvRd05ZReHtOVOrrE7tQFGn0HdntiMWNLz6s7g/edit" target="_blank">Budget Speech 2026 (MCCY Cut)</a><span class="date-tag">Mar 2026 Budget Debate</span></td>
+      </tr>
+      <tr>
+        <td class="no">D2</td>
+        <td><span class="ministry-tag">MCCY</span></td>
+        <td class="proposal-text">National time-banking platform on Giving.sg infrastructure: formalise mutual aid by allowing exchange of skills and care through time credits</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1-PT3JXvRd05ZReHtOVOrrE7tQFGn0HdntiMWNLz6s7g/edit" target="_blank">Budget Speech 2026 (MCCY Cut)</a><span class="date-tag">Mar 2026 Budget Debate</span></td>
+      </tr>
+      <tr>
+        <td class="no">D3</td>
+        <td><span class="ministry-tag">MCCY</span></td>
+        <td class="proposal-text">Ringfence portion of $50M SG Partnerships Fund for parent-led and youth-led ground-up initiatives with simplified access criteria; consider expanding fund to $100M</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1-PT3JXvRd05ZReHtOVOrrE7tQFGn0HdntiMWNLz6s7g/edit" target="_blank">Budget Speech 2026 (MCCY Cut)</a><span class="date-tag">Mar 2026 Budget Debate</span></td>
+      </tr>
+      <tr>
+        <td class="no">D4</td>
+        <td><span class="ministry-tag">MCCY / MOH / NAC</span></td>
+        <td class="proposal-text">National Arts for Flourishing strategy with inter-agency coordination (MOH, AIC, MCCY, NAC, MOE, MSF); public education on arts as a health and social prescribing tool</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1ngIIiNm_l82dhnYytYgjkvnHswLAeKGWAgfszArj1Yk/edit" target="_blank">Adjournment Motion — Arts (MCCY)</a><span class="date-tag">Feb 2026</span></td>
+      </tr>
+      <tr>
+        <td class="no">D5</td>
+        <td><span class="ministry-tag">MOH / MCCY</span></td>
+        <td class="proposal-text">Formalise recognition of arts therapists as allied health professionals with a regulatory and licensing framework; expand Creative Arts Therapy practitioner pool</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1ngIIiNm_l82dhnYytYgjkvnHswLAeKGWAgfszArj1Yk/edit" target="_blank">Adjournment Motion — Arts (MCCY)</a><span class="date-tag">Feb 2026</span></td>
+      </tr>
+      <tr>
+        <td class="no">D6</td>
+        <td><span class="ministry-tag">MOH / MOM</span></td>
+        <td class="proposal-text">Work with health insurers to include prescribed arts therapies under health insurance policy coverage</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1ngIIiNm_l82dhnYytYgjkvnHswLAeKGWAgfszArj1Yk/edit" target="_blank">Adjournment Motion — Arts (MCCY)</a><span class="date-tag">Feb 2026</span></td>
+      </tr>
+      <tr>
+        <td class="no">D7</td>
+        <td><span class="ministry-tag">NAC / MCCY</span></td>
+        <td class="proposal-text">Expand Culture Pass to all children (not just 18+); increase NAC-Tote Board grant quantum and scope for schools to organise student arts participation</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1ngIIiNm_l82dhnYytYgjkvnHswLAeKGWAgfszArj1Yk/edit" target="_blank">Adjournment Motion — Arts (MCCY)</a><span class="date-tag">Feb 2026</span></td>
+      </tr>
+      <tr>
+        <td class="no">D8</td>
+        <td><span class="ministry-tag">MCCY / NAC</span></td>
+        <td class="proposal-text">Support arts-for-wellbeing programmes with tiered funding models prioritising continuity over novelty pilots; make grants agnostic to entity registration status</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1ngIIiNm_l82dhnYytYgjkvnHswLAeKGWAgfszArj1Yk/edit" target="_blank">Adjournment Motion — Arts (MCCY)</a><span class="date-tag">Feb 2026</span></td>
+      </tr>
+      <tr>
+        <td class="no">D9</td>
+        <td><span class="ministry-tag">MTI / EDB</span></td>
+        <td class="proposal-text">Economic regionalisation programme: single centralised programme to build Singaporean capacity for regional roles across international companies, cross-border business navigation, and worker relocation</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1-PT3JXvRd05ZReHtOVOrrE7tQFGn0HdntiMWNLz6s7g/edit" target="_blank">Budget Speech 2026 (MTI Cut)</a><span class="date-tag">Mar 2026 Budget Debate</span></td>
+      </tr>
+      <tr>
+        <td class="no">D10</td>
+        <td><span class="ministry-tag">MOE / MCCY</span></td>
+        <td class="proposal-text">Use playback theatre in schools to address bullying, process grief, and develop social-emotional learning skills</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1ngIIiNm_l82dhnYytYgjkvnHswLAeKGWAgfszArj1Yk/edit" target="_blank">Adjournment Motion — Arts (MCCY)</a><span class="date-tag">Feb 2026</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- E: SOCIAL SERVICES & CHILD PROTECTION -->
+  <div class="section" id="social">
+    <div class="section-header">
+      <h2>E — Social Services &amp; Child Protection (MSF)</h2>
+      <span class="count">7 items</span>
+    </div>
+    <table>
+      <tr><th>#</th><th style="width:200px">Ministry/Tag</th><th>Policy Proposal</th><th style="width:200px">Source</th></tr>
+      <tr>
+        <td class="no">E1</td>
+        <td><span class="ministry-tag">MSF</span></td>
+        <td class="proposal-text">Mandatory caseload caps for Child Protection Officers to prevent burnout and ensure thorough case management</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1_bIeXZSFoGb691AJyDvDKAZRe_ckmxB-RXei5UWmxfY/edit" target="_blank">PQ Submission Nov 2025</a><span class="date-tag">Nov 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">E2</td>
+        <td><span class="ministry-tag">MSF</span></td>
+        <td class="proposal-text">Independent audit of supervision protocols and peer review structures in Child Protection Services teams</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1_bIeXZSFoGb691AJyDvDKAZRe_ckmxB-RXei5UWmxfY/edit" target="_blank">PQ Submission Nov 2025</a><span class="date-tag">Nov 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">E3</td>
+        <td><span class="ministry-tag">MSF</span></td>
+        <td class="proposal-text">Statutory legal protections for social service professionals making good-faith reports of suspected child abuse</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1cgY00ZM3I9Luz65h20qcibP-S-gwrJesDl8-BnlsBks/edit" target="_blank">SQs for Nov Parl</a><span class="date-tag">Nov 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">E4</td>
+        <td><span class="ministry-tag">MSF</span></td>
+        <td class="proposal-text">Address policy gap for children of incarcerated/incapable parents lacking formal guardianship — enable non-parent caregivers to act on children's behalf</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/18lveKnj5scBzo602oda11k6gUT5FgJweFgo_Zyk7y3s/edit" target="_blank">Jan 2026 PQ Submission</a><span class="date-tag">Jan 2026 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">E5</td>
+        <td><span class="ministry-tag">MSF</span></td>
+        <td class="proposal-text">Track ComCare return rates for exited families; compare outcomes between ComLink+ and non-ComLink+ households</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1_bIeXZSFoGb691AJyDvDKAZRe_ckmxB-RXei5UWmxfY/edit" target="_blank">PQ Submission Nov 2025</a><span class="date-tag">Nov 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">E6</td>
+        <td><span class="ministry-tag">MSF</span></td>
+        <td class="proposal-text">Address barriers to ComLink+ preschool attendance — caregiving constraints, financial factors — with targeted interventions</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1_bIeXZSFoGb691AJyDvDKAZRe_ckmxB-RXei5UWmxfY/edit" target="_blank">PQ Submission Nov 2025</a><span class="date-tag">Nov 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">E7</td>
+        <td><span class="ministry-tag">MSF</span></td>
+        <td class="proposal-text">Allocate additional resources to community agencies managing rising domestic violence caseloads (in light of Domestic Violence Trends Report 2024)</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/18lveKnj5scBzo602oda11k6gUT5FgJweFgo_Zyk7y3s/edit" target="_blank">Jan 2026 PQ Submission</a><span class="date-tag">Jan 2026 Parliament</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- F: HOUSING & URBAN PLANNING -->
+  <div class="section" id="housing">
+    <div class="section-header">
+      <h2>F — Housing &amp; Urban Planning (MND/HDB)</h2>
+      <span class="count">4 items</span>
+    </div>
+    <table>
+      <tr><th>#</th><th style="width:200px">Ministry/Tag</th><th>Policy Proposal</th><th style="width:200px">Source</th></tr>
+      <tr>
+        <td class="no">F1</td>
+        <td><span class="ministry-tag">MND / HDB</span></td>
+        <td class="proposal-text">Increase government intervention to reduce felt housing costs for B80 families — structural supply-side reform, not just grants</td>
+        <td><a class="source-link folder-link" href="https://drive.google.com/drive/folders/1YCbu-FZ1aE2OR8FnGG5GvRIemCcUpgYh" target="_blank">Long-term Planning Doc</a><span class="date-tag">Strategic Planning 2026–2030</span></td>
+      </tr>
+      <tr>
+        <td class="no">F2</td>
+        <td><span class="ministry-tag">MND / HDB</span></td>
+        <td class="proposal-text">Reform EIP Buyback Assistance Scheme — define "market failure" thresholds clearly; ensure scheme provides genuine relief to ethnicity-constrained sellers</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/174Q7kbYLr2_9ibvYSBRu_66f4NShmZmt0XEMecw_7to/edit" target="_blank">Feb 2026 PQ Submission</a><span class="date-tag">Feb 2026 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">F3</td>
+        <td><span class="ministry-tag">MND / HDB</span></td>
+        <td class="proposal-text">Increase child-friendly open spaces, playgrounds, and low-stimulus public environments in new HDB developments as a planning standard, not an amenity</td>
+        <td><a class="source-link folder-link" href="https://drive.google.com/drive/folders/1YCbu-FZ1aE2OR8FnGG5GvRIemCcUpgYh" target="_blank">Long-term Planning Doc</a><span class="date-tag">Strategic Planning 2026–2030</span></td>
+      </tr>
+      <tr>
+        <td class="no">F4</td>
+        <td><span class="ministry-tag">MOE / EDB</span></td>
+        <td class="proposal-text">Explore expansion of international schools with Singaporean curriculum in Southeast Asia to support regional talent mobility</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/174Q7kbYLr2_9ibvYSBRu_66f4NShmZmt0XEMecw_7to/edit" target="_blank">Feb 2026 PQ Submission</a><span class="date-tag">Feb 2026 Parliament</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- G: TRANSPORT -->
+  <div class="section" id="transport">
+    <div class="section-header">
+      <h2>G — Transport (MOT/LTA)</h2>
+      <span class="count">6 items</span>
+    </div>
+    <table>
+      <tr><th>#</th><th style="width:200px">Ministry/Tag</th><th>Policy Proposal</th><th style="width:200px">Source</th></tr>
+      <tr>
+        <td class="no">G1</td>
+        <td><span class="ministry-tag">MOT / LTA</span></td>
+        <td class="proposal-text">Extend free off-peak morning rail rides from NEL to Circle Line and North-South Line, addressing congestion at key interchanges</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1_bIeXZSFoGb691AJyDvDKAZRe_ckmxB-RXei5UWmxfY/edit" target="_blank">PQ Submission Nov 2025</a><span class="date-tag">Nov 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">G2</td>
+        <td><span class="ministry-tag">MOT / LTA</span></td>
+        <td class="proposal-text">Accessibility impact assessments for transport subsidies — ensure elderly, PWDs, and parents with young children benefit (inflexible schedule users)</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1cgY00ZM3I9Luz65h20qcibP-S-gwrJesDl8-BnlsBks/edit" target="_blank">SQs for Nov Parl</a><span class="date-tag">Nov 2025 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">G3</td>
+        <td><span class="ministry-tag">LTA</span></td>
+        <td class="proposal-text">Enhance bus infrastructure and accessibility for parents with young children and PWDs — designated stroller spaces, better boarding access</td>
+        <td><span style="color:var(--muted); font-size:12px">Land Transport Bill Speech, 2026</span><span class="date-tag">Bill Second Reading 2026</span></td>
+      </tr>
+      <tr>
+        <td class="no">G4</td>
+        <td><span class="ministry-tag">LTA</span></td>
+        <td class="proposal-text">Mandatory medical certification and device registration for mobility scooters; reduce speed limits for PMDs</td>
+        <td><span style="color:var(--muted); font-size:12px">Land Transport Bill Speech, 2026</span><span class="date-tag">Bill Second Reading 2026</span></td>
+      </tr>
+      <tr>
+        <td class="no">G5</td>
+        <td><span class="ministry-tag">LTA</span></td>
+        <td class="proposal-text">Ban non-UL2272 certified personal mobility devices from residential premises to prevent fire hazards</td>
+        <td><span style="color:var(--muted); font-size:12px">Land Transport Bill Speech, 2026</span><span class="date-tag">Bill Second Reading 2026</span></td>
+      </tr>
+      <tr>
+        <td class="no">G6</td>
+        <td><span class="ministry-tag">LTA</span></td>
+        <td class="proposal-text">Decriminalise ERP charges through administrative enforcement rather than criminal prosecution</td>
+        <td><span style="color:var(--muted); font-size:12px">Land Transport Bill Speech, 2026</span><span class="date-tag">Bill Second Reading 2026</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- H: ECONOMY & FINANCE -->
+  <div class="section" id="econ">
+    <div class="section-header">
+      <h2>H — Economy &amp; Finance (MOF/MTI)</h2>
+      <span class="count">3 items</span>
+    </div>
+    <table>
+      <tr><th>#</th><th style="width:200px">Ministry/Tag</th><th>Policy Proposal</th><th style="width:200px">Source</th></tr>
+      <tr>
+        <td class="no">H1</td>
+        <td><span class="ministry-tag">MOF</span></td>
+        <td class="proposal-text">Provide disaggregated "household market income" statistics by household type (retirees, PWDs, single-parent, different housing types) to prevent vulnerable groups being statistically averaged out</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1A4cWZVnkZFxsg7e7pfTUI2WCTX_gGvbyokVS1fgNziQ/edit" target="_blank">PQ Submission Mar 2026</a><span class="date-tag">Mar 2026 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">H2</td>
+        <td><span class="ministry-tag">MOF</span></td>
+        <td class="proposal-text">Assess impact of shift to household market income reporting on the design and targeting of ComCare, Silver Support, Workfare, and Assurance Package</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1A4cWZVnkZFxsg7e7pfTUI2WCTX_gGvbyokVS1fgNziQ/edit" target="_blank">PQ Submission Mar 2026</a><span class="date-tag">Mar 2026 Parliament</span></td>
+      </tr>
+      <tr>
+        <td class="no">H3</td>
+        <td><span class="ministry-tag">MTI / EDB</span></td>
+        <td class="proposal-text">Single centralised Singapore overseas regionalisation programme: build capacity for Singaporeans to take regional roles, navigate foreign business environments, and relocate for expansion opportunities</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/1-PT3JXvRd05ZReHtOVOrrE7tQFGn0HdntiMWNLz6s7g/edit" target="_blank">Budget Speech 2026 (MTI Cut)</a><span class="date-tag">Mar 2026 Budget Debate</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- I: ELDERLY, DISABILITY & SPORTS -->
+  <div class="section" id="other">
+    <div class="section-header">
+      <h2>I — Elderly, Disability &amp; Sports</h2>
+      <span class="count">6 items</span>
+    </div>
+    <table>
+      <tr><th>#</th><th style="width:200px">Ministry/Tag</th><th>Policy Proposal</th><th style="width:200px">Source</th></tr>
+      <tr>
+        <td class="no">I1</td>
+        <td><span class="ministry-tag">MOH / MSF</span></td>
+        <td class="proposal-text">Address asset-rich, cash-poor elderly who are ineligible for government-subsidised nursing homes due to property ownership thresholds</td>
+        <td><a class="source-link folder-link" href="https://drive.google.com/drive/folders/1YCbu-FZ1aE2OR8FnGG5GvRIemCcUpgYh" target="_blank">Long-term Planning Doc</a><span class="date-tag">Strategic Planning 2026–2030</span></td>
+      </tr>
+      <tr>
+        <td class="no">I2</td>
+        <td><span class="ministry-tag">MSF / SG Enable</span></td>
+        <td class="proposal-text">Reduce waiting times for Day Activity Centre enrolment; improve client-to-facilitator ratios in DACs</td>
+        <td><a class="source-link folder-link" href="https://drive.google.com/drive/folders/1YCbu-FZ1aE2OR8FnGG5GvRIemCcUpgYh" target="_blank">Long-term Planning Doc</a><span class="date-tag">Strategic Planning 2026–2030</span></td>
+      </tr>
+      <tr>
+        <td class="no">I3</td>
+        <td><span class="ministry-tag">MSF / SG Enable</span></td>
+        <td class="proposal-text">Increase state support for PWDs; build community infrastructure for dignified independent living and employment access</td>
+        <td><a class="source-link folder-link" href="https://drive.google.com/drive/folders/1YCbu-FZ1aE2OR8FnGG5GvRIemCcUpgYh" target="_blank">Long-term Planning Doc</a><span class="date-tag">Strategic Planning 2026–2030</span></td>
+      </tr>
+      <tr>
+        <td class="no">I4</td>
+        <td><span class="ministry-tag">SportSG / MCCY</span></td>
+        <td class="proposal-text">Recognise chess, bridge, and esports as competitive disciplines requiring athlete support infrastructure alongside traditional sports</td>
+        <td><span style="color:var(--muted); font-size:12px">Sports Council Amendment Bill Speech</span><span class="date-tag">Bill Second Reading</span></td>
+      </tr>
+      <tr>
+        <td class="no">I5</td>
+        <td><span class="ministry-tag">SportSG / MCCY</span></td>
+        <td class="proposal-text">Establish oversight mechanisms for SportSG's expanded mandate to balance broader inclusion with regulatory accountability</td>
+        <td><span style="color:var(--muted); font-size:12px">Sports Council Amendment Bill Speech</span><span class="date-tag">Bill Second Reading</span></td>
+      </tr>
+      <tr>
+        <td class="no">I6</td>
+        <td><span class="ministry-tag">SportSG / MCCY</span></td>
+        <td class="proposal-text">Increase transparency of funding allocation across sports for SEA Games 2025; breakdown by individual sports and performance outcomes</td>
+        <td><a class="source-link" href="https://docs.google.com/document/d/18lveKnj5scBzo602oda11k6gUT5FgJweFgo_Zyk7y3s/edit" target="_blank">Jan 2026 PQ Submission</a><span class="date-tag">Jan 2026 Parliament</span></td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+
+<footer>Elysa Chen Parliamentary Work Folder · Google Drive · Compiled March 2026 · 65 policy items across 9 areas</footer>
+</body>
+</html>
